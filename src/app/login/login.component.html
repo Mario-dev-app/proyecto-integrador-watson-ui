@@ -1,0 +1,24 @@
+<div class="d-flex align-items-center justify-content-center" style="width: 100vw; height: 100vh;">
+    <div class="col-12 col-md-3 p-4 shadow">
+        <h4 class="text-center">Login</h4>
+        <hr>
+
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <div class="row">
+                <label for="usuario" class="col-4 col-form-label">Usuario:</label>
+                <div class="col-8">
+                    <input type="text" class="form-control" id="usuario" formControlName="usuario">
+                </div>
+            </div>
+            <div class="row mt-3">
+                <label for="pass" class="col-4 col-form-label">Contraseña:</label>
+                <div class="col-8">
+                    <input type="password" class="form-control" id="pass" formControlName="pass">
+                </div>
+            </div>
+            <div class="row mt-3">
+                <button class="btn btn-dark">Ingresar</button>
+            </div>
+        </form>
+    </div>
+</div>
