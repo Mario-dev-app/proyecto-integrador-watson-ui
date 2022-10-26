@@ -8,10 +8,11 @@
             <button (click)="obtenerEspecialidades()" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#especialidadesModal"> <i class="fa fa-question"></i> Especialidades</button>
         </div>
     </div>
-    
+
     <div class="row mt-2">
         <div class="col-md-6">
-            <input type="text" class="form-control" placeholder="Buscar...">
+            <input type="number" class="form-control" placeholder="Buscar..." (keyup)="buscarCitas($event)">
+            <small>Busque las citas por DNI o por código</small>
         </div>
     </div>
 
@@ -29,7 +30,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let cita of citas">
-                    <td class="text-center">{{cita.dni}}</td>
+                    <td class="text-center"><a href="#" (click)="pacientePorDni(cita.dni)" data-bs-toggle="modal" data-bs-target="#dniModal">{{cita.dni}}</a></td>
                     <td class="text-center">{{cita.fecha}}</td>
                     <td class="text-center">{{cita.especialidad}}</td>
                     <td class="text-center">{{cita.turno}}</td>
@@ -120,6 +121,46 @@
                         <td>{{especialidad.codigo}}</td>
                     </tr>
                 </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- MODAL DNI -->
+  <div class="modal fade" id="dniModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Datos del paciente</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="table-responsive text-center">
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <td>Nombre:</td>
+                  <td>{{paciente.nombre}}</td>
+                </tr>
+                <tr>
+                  <td>Apellidos:</td>
+                  <td>{{paciente.apellidos}}</td>
+                </tr>
+                <tr>
+                  <td>Correo:</td>
+                  <td>{{paciente.correo}}</td>
+                </tr>
+                <tr>
+                  <td>Teléfono:</td>
+                  <td>{{paciente.telefono}}</td>
+                </tr>
+              </tbody>
             </table>
           </div>
         </div>

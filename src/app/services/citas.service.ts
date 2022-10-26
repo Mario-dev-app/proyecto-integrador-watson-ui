@@ -17,4 +17,8 @@ export class CitasService {
   modificarEstadoCita(id: string, atendida: boolean){
     return this.http.put(`${environment.BASE_URL}/modificar-estado-cita`, {id: id, atendida: atendida});
   }
+
+  buscarCitas(search: string){
+    return this.http.post(`${environment.BASE_URL}/buscar-cita`, {search});
+  }
 }

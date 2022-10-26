@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CitasService } from 'src/app/services/citas.service';
 import { EspecialidadesService } from 'src/app/services/especialidades.service';
+import { PacienteService } from 'src/app/services/paciente.service';
 import { TurnosService } from 'src/app/services/turnos.service';
 import Swal from 'sweetalert2';
 
@@ -22,11 +23,14 @@ export class CitasComponent implements OnInit {
 
   especialidades: any[] = [];
 
+  paciente: any = [];
+
   constructor(
-    private citasService: CitasService, 
+    private citasService: CitasService,
     private spinner: NgxSpinnerService,
     private turnosService: TurnosService,
-    private especialidadesService: EspecialidadesService
+    private especialidadesService: EspecialidadesService,
+    private pacienteService: PacienteService
     ) { }
 
   ngOnInit(): void {
@@ -102,6 +106,26 @@ export class CitasComponent implements OnInit {
     this.especialidadesService.obtenerEspecialidades().subscribe((resp: any) => {
       this.especialidades = resp.data;
     })
+  }
+
+  buscarCitas(event: any){
+    if(event.target.value.length == 0){
+      this.obtenerCitas();
+      return;
+    }
+    this.citasService.buscarCitas(event.target.value).subscribe((resp:any) => {
+      if(resp.data.lenth == 0){
+        this.obtenerCitas();
+      }else{
+        this.citas = resp.data;
+      }
+    });
+  }
+
+  pacientePorDni(dni: string){
+    this.pacienteService.pacientePorDni(dni.trim()).subscribe((resp: any) => {
+      this.paciente = resp.data;
+    });
   }
 
 }
